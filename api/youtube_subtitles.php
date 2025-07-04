@@ -74,8 +74,8 @@ try {
     // Return the data in the format expected by the frontend
     echo json_encode([
         'success' => true,
-        'subtitles' => $apiData['data']
-        // 'language' => $apiData['language'] ?? 'English'
+        'subtitles' => $apiData['data'],
+        'language' => $apiData['language'] ?? 'English'
         // 'message' => $apiData['message'] ?? null
     ]);
     
