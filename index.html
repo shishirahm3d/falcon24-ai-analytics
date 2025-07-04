@@ -133,8 +133,8 @@
                                 <div class="feature-icon youtube">
                                     <i class="fab fa-youtube"></i>
                                 </div>
-                                <h3>YouTube Summary</h3>
-                                <p>Extract subtitles from YouTube videos and generate AI-powered summaries with sentiment analysis.</p>
+                                <h3>YouTube Transcription</h3>
+                                <!-- <p>Extract subtitles from YouTube videos and generate AI-powered summaries with sentiment analysis.</p> -->
                                 <div class="feature-stats">
                                     <span><i class="fas fa-closed-captioning"></i> Subtitle Extraction</span>
                                     <span><i class="fas fa-file-alt"></i> AI Summary</span>
@@ -325,8 +325,8 @@
             <!-- YOUTUBE SUMMARY PAGE -->
             <div id="page-youtube" class="page-container">
                 <div class="page-header">
-                    <h1><i class="fab fa-youtube"></i> YouTube Summary</h1>
-                    <p>Extract subtitles from YouTube videos and generate AI-powered summaries</p>
+                    <h1><i class="fab fa-youtube"></i> YouTube Transcription</h1>
+                    <!-- <p>Extract subtitles from YouTube videos and generate AI-powered summaries</p> -->
                 </div>
                 
                 <div class="analysis-container">
@@ -338,33 +338,20 @@
                                 <input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=... or https://youtube.com/shorts/...">
                             </div>
                             <button class="analyze-btn" onclick="extractYouTubeSubtitles()">
-                                <i class="fas fa-download"></i> Extract Subtitles
+                                <i class="fas fa-download"></i> Extract Texts
                             </button>
-                            
-                            <!-- Test button for demo -->
-                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
-                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">
-                                    <i class="fas fa-lightbulb"></i> Try with a sample video:
-                                </p>
-                                <button class="test-btn" onclick="loadTestVideo()" style="font-size: 0.85rem; padding: 6px 12px;">
-                                    <i class="fas fa-play"></i> Load Sample Video
-                                </button>
-                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">
-                                    This loads a July Movement video with available captions for testing.
-                                </p>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="results-section">
                         <div class="chart-card">
-                            <h3><i class="fas fa-closed-captioning"></i> Extracted Subtitles</h3>
+                            <h3><i class="fab fa-youtube"></i> Extracted Subtitles</h3>
                             <div class="subtitle-area">
                                 <div id="subtitle-output" class="subtitle-content">
                                     <div class="placeholder-content">
-                                        <i class="fas fa-closed-captioning" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; display: block; text-align: center;"></i>
-                                        <h4>Ready for Subtitle Extraction</h4>
-                                        <p>Provide a YouTube video URL to extract subtitles.</p>
+                                        <i class="fab fa-youtube" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; display: block; text-align: center;"></i>
+                                        <h4>Ready for Extraction</h4>
+                                        <!-- <p>Provide a YouTube video URL to extract subtitles.</p> -->
                                     </div>
                                 </div>
                                 <button class="copy-btn" id="copySubtitlesBtn" onclick="copyToClipboard('subtitle-output')" style="display: none;">
@@ -379,7 +366,7 @@
                                 <div class="placeholder-content">
                                     <i class="fas fa-file-alt" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; display: block; text-align: center;"></i>
                                     <h4>Ready for AI Summary</h4>
-                                    <p>Extract subtitles first, then AI will generate a comprehensive summary.</p>
+                                    <!-- <p>Extract subtitles first, then AI will generate a comprehensive summary.</p> -->
                                 </div>
                             </div>
                             <button class="copy-btn" id="copySummaryBtn" onclick="copyToClipboard('youtube-text-results')" style="display: none;">
