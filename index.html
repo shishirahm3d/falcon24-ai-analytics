@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falcon-24 AI Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="description" content="Advanced AI-powered analytics dashboard for influencer identification, sentiment analysis, and predictive insights">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>AI Analytics Hub</h2>
+                <div class="status-indicator"></div>
+                <span style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">System Active</span>
+                <button class="settings-btn" onclick="openSettings()">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="navigation-menu">
+                    <h3><i class="fas fa-compass"></i> Navigation</h3>
+                    <div class="nav-list">
+                        <button class="nav-item active" onclick="showPage('home')" data-page="home">
+                            <i class="fas fa-home"></i> Home
+                        </button>
+                        <button class="nav-item" onclick="showPage('influencer')" data-page="influencer">
+                            <i class="fas fa-users"></i> Influencer Analysis
+                        </button>
+                        <button class="nav-item" onclick="showPage('sentiment')" data-page="sentiment">
+                            <i class="fas fa-heart"></i> Sentiment Analysis
+                        </button>
+                        <button class="nav-item" onclick="showPage('predictive')" data-page="predictive">
+                            <i class="fas fa-chart-area"></i> Predictive Analysis
+                        </button>
+                        <button class="nav-item" onclick="showPage('youtube')" data-page="youtube">
+                            <i class="fab fa-youtube"></i> YouTube Summary
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-history">
+                    <h3><i class="fas fa-history"></i> Analysis History</h3>
+                    <div id="chatHistoryList" class="chat-history-list"></div>
+                </div>
+                <div class="sidebar-actions">
+                    <button class="action-btn" onclick="saveCurrentAnalysis()" id="saveBtn" style="display: none;">
+                        <i class="fas fa-save"></i> Save Analysis
+                    </button>
+                    <button class="action-btn" onclick="downloadLog()" id="downloadBtn" style="display: none;">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                    <button class="action-btn" onclick="clearResults()" id="clearBtn" style="display: none;">
+                        <i class="fas fa-refresh"></i> Clear Results
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="chat-header">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1><i class="fas fa-brain"></i> Falcon-24 Dashboard</h1>
+                <div class="header-actions">
+                    <div class="status-badge">
+                        <span class="status-indicator"></span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">AI Ready</span>
+                    </div>
+                    <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+                        <i id="themeIcon" class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- HOME PAGE -->
+            <div id="page-home" class="page-container active">
+                <div class="home-hero">
+                    <div class="hero-content">
+                        <h1><i class="fas fa-brain"></i> Falcon-24 AI Analytics</h1>
+                        <p class="hero-subtitle">Advanced AI-powered analytics for social media insights, sentiment analysis, and predictive forecasting</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card" onclick="showPage('influencer')">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Influencer Analysis</h3>
+                                <p>Identify potential influencers and analyze their reach, engagement, and impact on social media platforms.</p>
+                                <div class="feature-stats">
+                                    <span><i class="fas fa-chart-line"></i> Engagement Metrics</span>
+                                    <span><i class="fas fa-eye"></i> Reach Analysis</span>
+                                </div>
+                                <button class="feature-btn">
+                                    Analyze Influencers <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="feature-card" onclick="showPage('sentiment')">
+                                <div class="feature-icon sentiment">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h3>Sentiment Analysis</h3>
+                                <p>Evaluate emotional tone and sentiment distribution of text content, reviews, and social media posts.</p>
+                                <div class="feature-stats">
+                                    <span><i class="fas fa-smile"></i> Emotion Detection</span>
+                                    <span><i class="fas fa-chart-pie"></i> Sentiment Distribution</span>
+                                </div>
+                                <button class="feature-btn">
+                                    Analyze Sentiment <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="feature-card" onclick="showPage('predictive')">
+                                <div class="feature-icon predictive">
+                                    <i class="fas fa-chart-area"></i>
+                                </div>
+                                <h3>Predictive Analysis</h3>
+                                <p>Forecast future trends and outcomes based on news, social media data, and market indicators.</p>
+                                <div class="feature-stats">
+                                    <span><i class="fas fa-calendar-alt"></i> Future Forecasting</span>
+                                    <span><i class="fas fa-chart-line"></i> Trend Analysis</span>
+                                </div>
+                                <button class="feature-btn">
+                                    Generate Predictions <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="feature-card" onclick="showPage('youtube')">
+                                <div class="feature-icon youtube">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <h3>YouTube Summary</h3>
+                                <p>Extract subtitles from YouTube videos and generate AI-powered summaries with sentiment analysis.</p>
+                                <div class="feature-stats">
+                                    <span><i class="fas fa-closed-captioning"></i> Subtitle Extraction</span>
+                                    <span><i class="fas fa-file-alt"></i> AI Summary</span>
+                                </div>
+                                <button class="feature-btn">
+                                    Extract & Summarize <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-robot"></i>
+                                <div>
+                                    <h4>AI-Powered</h4>
+                                    <p>Advanced ML Models</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-zap"></i>
+                                <div>
+                                    <h4>Real-time</h4>
+                                    <p>Instant Analysis</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h4>Secure</h4>
+                                    <p>Privacy Protected</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFLUENCER ANALYSIS PAGE -->
+            <div id="page-influencer" class="page-container">
+                <div class="page-header">
+                    <h1><i class="fas fa-users"></i> Influencer Analysis</h1>
+                    <p>Identify and analyze potential influencers from social media data</p>
+                </div>
+                
+                <div class="analysis-container">
+                    <div class="input-section">
+                        <div class="input-card">
+                            <h3><i class="fas fa-upload"></i> Input Data</h3>
+                            <div class="input-group">
+                                <label for="influencerTextInput"><i class="fas fa-comments"></i> Social Media Data</label>
+                                <textarea id="influencerTextInput" placeholder="E.g., User A: Great post! (Followers: 1M, Likes: 50K)..."></textarea>
+                            </div>
+                            <div class="file-upload-container">
+                                <label for="influencerFile" class="file-upload-label">
+                                    <i class="fas fa-upload"></i> Upload Data File
+                                </label>
+                                <input type="file" id="influencerFile" class="file-input" onchange="handleFileUpload('influencerTextInput', event)" accept=".txt,.csv,.json">
+                            </div>
+                            <button class="analyze-btn" onclick="analyzeInfluencers()">
+                                <i class="fas fa-search"></i> Analyze Influencers
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-section">
+                        <div class="chart-card">
+                            <h3><i class="fas fa-chart-bar"></i> Visual Analytics</h3>
+                            <div class="chart-area">
+                                <canvas id="resultsChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="text-results-card">
+                            <h3><i class="fas fa-brain"></i> Analysis Results</h3>
+                            <div id="ai-text-results" class="results-content">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-users" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px;"></i>
+                                    <h4>Ready for Influencer Analysis</h4>
+                                    <p>Provide social media data to identify potential influencers and analyze their metrics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SENTIMENT ANALYSIS PAGE -->
+            <div id="page-sentiment" class="page-container">
+                <div class="page-header">
+                    <h1><i class="fas fa-heart"></i> Sentiment Analysis</h1>
+                    <p>Evaluate emotional tone and sentiment distribution of text content</p>
+                </div>
+                
+                <div class="analysis-container">
+                    <div class="input-section">
+                        <div class="input-card">
+                            <h3><i class="fas fa-upload"></i> Input Text</h3>
+                            <div class="input-group">
+                                <label for="sentimentTextInput"><i class="fas fa-comment-alt"></i> Text Content</label>
+                                <textarea id="sentimentTextInput" placeholder="Enter comments, reviews, articles, or any text content for sentiment analysis..."></textarea>
+                            </div>
+                            <div class="file-upload-container">
+                                <label for="sentimentFile" class="file-upload-label">
+                                    <i class="fas fa-upload"></i> Upload Text File
+                                </label>
+                                <input type="file" id="sentimentFile" class="file-input" onchange="handleFileUpload('sentimentTextInput', event)" accept=".txt,.csv">
+                            </div>
+                            <button class="analyze-btn" onclick="performSentimentAnalysis()">
+                                <i class="fas fa-chart-line"></i> Analyze Sentiment
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-section">
+                        <div class="chart-card">
+                            <h3><i class="fas fa-chart-pie"></i> Sentiment Distribution</h3>
+                            <div class="chart-area">
+                                <canvas id="sentimentChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="text-results-card">
+                            <h3><i class="fas fa-brain"></i> Analysis Results</h3>
+                            <div id="sentiment-text-results" class="results-content">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-heart" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px;"></i>
+                                    <h4>Ready for Sentiment Analysis</h4>
+                                    <p>Provide text content to analyze emotional tone and sentiment distribution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREDICTIVE ANALYSIS PAGE -->
+            <div id="page-predictive" class="page-container">
+                <div class="page-header">
+                    <h1><i class="fas fa-chart-area"></i> Predictive Analysis</h1>
+                    <p>Forecast future outcomes based on news and social media trends</p>
+                </div>
+                
+                <div class="analysis-container">
+                    <div class="input-section">
+                        <div class="input-card">
+                            <h3><i class="fas fa-upload"></i> Input Data</h3>
+                            <div class="input-group">
+                                <label for="newsInput"><i class="fas fa-newspaper"></i> News & Reports</label>
+                                <textarea id="newsInput" placeholder="Paste news articles, press releases, or market reports..."></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="youtubeInput"><i class="fas fa-video"></i> Social Media & YouTube</label>
+                                <textarea id="youtubeInput" placeholder="Paste social media trends, YouTube summaries, or viral content..."></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="scheduledDate"><i class="fas fa-calendar-alt"></i> Target Date</label>
+                                <input type="date" id="scheduledDate" min="">
+                            </div>
+                            <button class="analyze-btn" onclick="predictSituation()">
+                                <i class="fas fa-bolt"></i> Generate Prediction
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-section">
+                        <div class="chart-card">
+                            <h3><i class="fas fa-magic"></i> Prediction Summary</h3>
+                            <div class="chart-area">
+                                <div id="prediction-visual-summary" class="prediction-summary-card" style="display: none;"></div>
+                                <canvas id="predictiveChart" style="display: none;"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="text-results-card">
+                            <h3><i class="fas fa-brain"></i> Analysis Results</h3>
+                            <div id="predictive-text-results" class="results-content">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-chart-area" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px;"></i>
+                                    <h4>Ready for Predictive Analysis</h4>
+                                    <p>Provide news data and social media trends to generate future predictions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YOUTUBE SUMMARY PAGE -->
+            <div id="page-youtube" class="page-container">
+                <div class="page-header">
+                    <h1><i class="fab fa-youtube"></i> YouTube Summary</h1>
+                    <p>Extract subtitles from YouTube videos and generate AI-powered summaries</p>
+                </div>
+                
+                <div class="analysis-container">
+                    <div class="input-section">
+                        <div class="input-card">
+                            <h3><i class="fas fa-link"></i> YouTube Video</h3>
+                            <div class="input-group">
+                                <label for="youtubeUrl"><i class="fab fa-youtube"></i> YouTube Video/Short URL</label>
+                                <input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=... or https://youtube.com/shorts/...">
+                            </div>
+                            <button class="analyze-btn" onclick="extractYouTubeSubtitles()">
+                                <i class="fas fa-download"></i> Extract Subtitles
+                            </button>
+                            
+                            <!-- Test button for demo -->
+                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">
+                                    <i class="fas fa-lightbulb"></i> Try with a sample video:
+                                </p>
+                                <button class="test-btn" onclick="loadTestVideo()" style="font-size: 0.85rem; padding: 6px 12px;">
+                                    <i class="fas fa-play"></i> Load Sample Video
+                                </button>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">
+                                    This loads a July Movement video with available captions for testing.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="results-section">
+                        <div class="chart-card">
+                            <h3><i class="fas fa-closed-captioning"></i> Extracted Subtitles</h3>
+                            <div class="subtitle-area">
+                                <div id="subtitle-output" class="subtitle-content">
+                                    <div class="placeholder-content">
+                                        <i class="fas fa-closed-captioning" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; display: block; text-align: center;"></i>
+                                        <h4>Ready for Subtitle Extraction</h4>
+                                        <p>Provide a YouTube video URL to extract subtitles.</p>
+                                    </div>
+                                </div>
+                                <button class="copy-btn" id="copySubtitlesBtn" onclick="copyToClipboard('subtitle-output')" style="display: none;">
+                                    <i class="fas fa-copy"></i> Copy Subtitles
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-results-card">
+                            <h3><i class="fas fa-brain"></i> AI Summary</h3>
+                            <div id="youtube-text-results" class="results-content">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-file-alt" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; display: block; text-align: center;"></i>
+                                    <h4>Ready for AI Summary</h4>
+                                    <p>Extract subtitles first, then AI will generate a comprehensive summary.</p>
+                                </div>
+                            </div>
+                            <button class="copy-btn" id="copySummaryBtn" onclick="copyToClipboard('youtube-text-results')" style="display: none;">
+                                <i class="fas fa-copy"></i> Copy Summary
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingModal" class="modal">
+        <div class="modal-content loading-modal">
+            <div class="loading-spinner"></div>
+            <h3 id="loadingText">Processing your request...</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Please wait while our AI analyzes your data</p>
+        </div>
+    </div>
+    
+    <div id="settingsModal" class="modal">
+        <div class="modal-content settings-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-cogs"></i> AI Configuration</h2>
+                <button class="close-btn" onclick="closeSettings()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="modelInput"><i class="fas fa-robot"></i> AI Model</label>
+                    <input type="text" id="modelInput" placeholder="Enter model name">
+                </div>
+                <div class="form-group">
+                    <label for="apiUrlInput"><i class="fas fa-link"></i> API URL</label>
+                    <input type="text" id="apiUrlInput" placeholder="Enter API URL">
+                </div>
+                <div class="form-group">
+                    <label for="temperatureInput"><i class="fas fa-thermometer-half"></i> Temperature: <span id="temperatureValue">0.8</span></label>
+                    <input type="range" id="temperatureInput" min="0" max="1" step="0.1" value="0.8">
+                    <small style="color: var(--text-secondary);">Controls randomness in AI responses (0 = deterministic, 1 = creative)</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" onclick="saveSettings()">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="contextMenu" class="context-menu">
+        <div class="context-menu-item" onclick="openRenameModal()">Rename</div>
+        <div class="context-menu-item" onclick="deleteSelectedChat()">Delete</div>
+    </div>
+     <div id="renameChatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Rename Log</h2>
+                <button class="close-btn" onclick="closeRenameModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="newChatNameInput">New Name:</label>
+                    <input type="text" id="newChatNameInput" placeholder="Enter new log name">
+                    <input type="hidden" id="chatToRename">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" onclick="renameChat()">Rename</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

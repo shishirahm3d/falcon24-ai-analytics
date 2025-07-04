@@ -1,0 +1,5 @@
+{
+    "model": "hf.co\/shishirahm3d\/banglamind-8b-instruct-bnb-4bit-q4km-GGUF:latest",
+    "apiUrl": "http:\/\/ai.shishirahmed.me:11435\/api\/chat\/",
+    "temperature": 0.8
+}
