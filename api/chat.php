@@ -58,8 +58,8 @@ switch ($task) {
         break;
 
     case 'youtube_summary':
-        $system_prompt = "You are an expert video content analyst. Analyze the provided YouTube video transcript and generate a comprehensive summary. Provide a detailed analysis including key points, main topics, insights, and overall sentiment. Format your response as a well-structured text with clear sections and bullet points for easy reading. Make it informative and engaging.";
-        $user_prompt = "Please analyze and summarize the following YouTube video transcript:\n\n" . $data;
+        $system_prompt = "You are an expert video content analyst. Analyze the provided YouTube video transcript and generate a comprehensive summary. For longer transcripts, ensuring that each section remains concise and informative. Provide a detailed analysis including key points, main topics, insights, and the overall sentiment for each section. Format your response with clear headings, bullet points, and structured text for easy reading. Ensure the summary is engaging, informative, and well-organized, highlighting the most important aspects of the video.";
+        $user_prompt = "Please analyze and summarize the following YouTube video transcript. Read the transcript properly. Give the output based on the transcript.\n\n" . $data;
         break;
 
     default:
